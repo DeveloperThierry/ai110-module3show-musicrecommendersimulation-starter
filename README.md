@@ -17,15 +17,21 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
+While spotify and other music recommendations apps have complex algorithms that attempt to predict the next song the user would enjoy, our algorithm is a bit less complex. Primarily we will be focusing on factors involving mood, genre, and energy to match user with songs.
+
+## Design
 Explain your design in plain language.
 
 Some prompts to answer:
 
 - What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
+  - id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 - What information does your `UserProfile` store
+  - favorite_genre, favorite_mood,target_energy,likes_acoustic=False,
 - How does your `Recommender` compute a score for each song
+ - genre, mood, and energy
 - How do you choose which songs to recommend
+  - genre and mood likeliness to userprofile
 
 You can include a simple diagram or bullet list if helpful.
 
