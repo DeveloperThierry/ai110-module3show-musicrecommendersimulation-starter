@@ -38,6 +38,31 @@ def main() -> None:
         "likes_acoustic": True
     }
 
+    # Profile for "upbeat pop"
+    upbeat_pop_profile = {
+        "favorite_genre": "pop",
+        "favorite_mood": "upbeat",
+        "target_energy": 0.7,
+        "likes_acoustic": False
+    }
+
+    # ADVERSARIAL PROFILE: Conflicting Preferences
+    adversarial_profile = {
+        "favorite_genre": "pop",
+        "favorite_mood": "sad",
+        "target_energy": 0.9, # High energy but sad mood
+        "likes_acoustic": False
+    }
+
+    # EDGE CASE PROFILE: Niche Preferences
+    edge_case_profile = {
+        "favorite_genre": "classical", # Potentially no classical songs in the dataset
+        "favorite_mood": "contemplative",
+        "target_energy": 0.2,
+        "likes_acoustic": True
+    }
+
+
     print("--- Intense Rock Recommendations ---")
     rock_recommendations = recommend_songs(intense_rock_profile, songs, k=3)
     for rec in rock_recommendations:
@@ -49,6 +74,30 @@ def main() -> None:
     print("\n--- Chill Lofi Recommendations ---")
     lofi_recommendations = recommend_songs(chill_lofi_profile, songs, k=3)
     for rec in lofi_recommendations:
+        song, score, explanation = rec
+        print(f"{song['title']} - Score: {score:.2f}")
+        print(f"Because: {explanation}")
+        print()
+
+    print("\n--- Upbeat Pop Recommendations ---")
+    pop_recommendations = recommend_songs(upbeat_pop_profile, songs, k=3)
+    for rec in pop_recommendations:
+        song, score, explanation = rec
+        print(f"{song['title']} - Score: {score:.2f}")
+        print(f"Because: {explanation}")
+        print()
+
+    print("\n--- Adversarial Profile Recommendations ---")
+    adversarial_recommendations = recommend_songs(adversarial_profile, songs, k=3)
+    for rec in adversarial_recommendations:
+        song, score, explanation = rec
+        print(f"{song['title']} - Score: {score:.2f}")
+        print(f"Because: {explanation}")
+        print()
+
+    print("\n--- Edge Case Profile Recommendations ---")
+    edge_case_recommendations = recommend_songs(edge_case_profile, songs, k=3)
+    for rec in edge_case_recommendations:
         song, score, explanation = rec
         print(f"{song['title']} - Score: {score:.2f}")
         print(f"Because: {explanation}")

@@ -82,9 +82,11 @@ You can add more tests in `tests/test_recommender.py`.
 Use this section to document the experiments you ran. For example:
 
 - What happened when you changed the weight on genre from 2.0 to 0.5
+The model currently overfits genre since it has high weight of 2.0 and lowering it would balance the fitting.
 - What happened when you added tempo or valence to the score
+The model does not use tempo or valence to the socre
 - How did your system behave for different types of users
-
+It worked best for lofi and pop preferenced users since there were more songs that fit those categories
 ---
 
 ## Limitations and Risks
@@ -93,9 +95,9 @@ Summarize some limitations of your recommender.
 
 Examples:
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+- The model favors more represented fields such as genre of pop as it is the most frequently occuring in csv
+- It does not review lyrics or language
+- Huge recommenders have millions of songs, but the dataset is relatively small.
 
 You will go deeper on this in your model card.
 
@@ -109,8 +111,7 @@ Read and complete `model_card.md`:
 
 Write 1 to 2 paragraphs here about what you learned:
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+- I learned that recommendation systems work on a scoring scale. The final score or sum total of all assigned points determines the recommendation. I would guess more complex algorithms work similiar using vectors and various factors like lyrics. Finally, the reasoning also helps users and developers understand the logic.
 
 
 ---
@@ -131,8 +132,7 @@ Give your recommender a name, for example:
 
 ## 2. Intended Use
 
-- What is this system trying to do
-- Who is it for
+- The system is intended for music listeners. The system is attempting to recommend the top songs that match user preferences.
 
 Example:
 
@@ -157,9 +157,13 @@ Try to avoid code in this section, treat it like an explanation to a non program
 Describe your dataset.
 
 - How many songs are in `data/songs.csv`
+40 songs
 - Did you add or remove any songs
+No songs removed
 - What kinds of genres or moods are represented
+Not all generes or mood represented as classical and rap where missing.
 - Whose taste does this data mostly reflect
+This data mostly reflects taste for mainstream lofi and pop
 
 ---
 
@@ -168,9 +172,8 @@ Describe your dataset.
 Where does your recommender work well
 
 You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
+- The recommender works well on direct user matches
+- The recommender works best with user profiles that are detailed and well-defined
 
 ---
 
@@ -179,10 +182,9 @@ You can think about:
 Where does your recommender struggle
 
 Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
+- Recommender struggles with overfiting for gnere since it is assigned more weight
+- Recommender struggles since song dataset are more limited.
+- It is biased towards lofi and pop since its the majority of the dataset
 
 ---
 
@@ -191,9 +193,8 @@ Some prompts:
 How did you check your system
 
 Examples:
-- You tried multiple user profiles and wrote down whether the results matched your expectations
-- You compared your simulation to what a real app like Spotify or YouTube tends to recommend
-- You wrote tests for your scoring logic
+- I tried multiple user profiles and even a few edge and adversarial cases.
+
 
 You do not need a numeric metric, but if you used one, explain what it measures.
 
@@ -205,9 +206,8 @@ If you had more time, how would you improve this recommender
 
 Examples:
 
-- Add support for multiple users and "group vibe" recommendations
-- Balance diversity of songs instead of always picking the closest match
-- Use more features, like tempo ranges or lyric themes
+- I would have added more dynamic scoring logic such as penalties for repeated songs
+- I would use more factors such as language and lyrics as a larger factor in the recommender
 
 ---
 
@@ -216,8 +216,11 @@ Examples:
 A few sentences about what you learned:
 
 - What surprised you about how your system behaved
+I was suprised that AI made greta recommendations such as a do not play recommendation for disliked songs
 - How did building this change how you think about real music recommenders
+This makes the recommendation system more accurate to match user preferences
 - Where do you think human judgment still matters, even if the model seems "smart"
+Human judgement is important for noticing edge cases. For example, some users may believe lyrics are too vulgar or unrelatable.
 
 ## Screenshots
 
@@ -227,3 +230,11 @@ A few sentences about what you learned:
 ### Intense Rock
 ![Intense Rock](public/intense_rock.png)
 
+### Upbeat Pop
+![Upbeat Pop](public/upbeat_pop.png)
+
+### Edge Case
+![Edge Case](public/edge.png)
+
+### Adversarial
+![Adversarial](public/adversarial.png)
