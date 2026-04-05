@@ -19,6 +19,11 @@ Replace this paragraph with your own summary of what your version does.
 
 While spotify and other music recommendations apps have complex algorithms that attempt to predict the next song the user would enjoy, our algorithm is a bit less complex. Primarily we will be focusing on factors involving mood, genre, and energy to match user with songs.
 
+The approach we use is point based where we consider mood, genere, and energy level to score each song. The algorithm recipe goes as follow; if genre matches it gets 2 points, if energy matches it gets up to one point and if acoustic matches score gets extra one point bump. 
+
+Biases 
+There is potential for bias for genre since it is assigned more weight. This opens the floor for users to get stuck in a particular genre like country.
+
 ## Design
 Explain your design in plain language.
 
@@ -114,7 +119,6 @@ Write 1 to 2 paragraphs here about what you learned:
 
 Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
 
-```markdown
 # 🎧 Model Card - Music Recommender Simulation
 
 ## 1. Model Name
@@ -214,4 +218,12 @@ A few sentences about what you learned:
 - What surprised you about how your system behaved
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
+
+## Screenshots
+
+### Chill Lo-fi
+![Chill Lo-fi](public/chill_lofi.png)
+
+### Intense Rock
+![Intense Rock](public/intense_rock.png)
 

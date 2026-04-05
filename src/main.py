@@ -8,22 +8,47 @@ You will implement the functions in recommender.py:
 - score_song
 - recommend_songs
 """
+def print_recommendations(profile_name: str, recommendations: list) -> None:
+    print(f"\n{'='*20} {profile_name} {'='*20}")
+    for song, score, explanation in recommendations:
+        print(f"🎵 {song['title']:<30} | Score: {score:.2f}")
+        print(f"   Why: {explanation}")
+        print("-" * 50)
 
 from recommender import load_songs, recommend_songs
 
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
+    print(f"Loaded songs: {len(songs)}")
 
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    # Profile for "intense rock"
+    intense_rock_profile = {
+        "favorite_genre": "rock", 
+        "favorite_mood": "intense", 
+        "target_energy": 0.9,
+        "likes_acoustic": False
+    }
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+    # Profile for "chill lofi"
+    chill_lofi_profile = {
+        "favorite_genre": "lofi", 
+        "favorite_mood": "chill", 
+        "target_energy": 0.4,
+        "likes_acoustic": True
+    }
 
-    print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, explanation)
+    print("--- Intense Rock Recommendations ---")
+    rock_recommendations = recommend_songs(intense_rock_profile, songs, k=3)
+    for rec in rock_recommendations:
+        song, score, explanation = rec
+        print(f"{song['title']} - Score: {score:.2f}")
+        print(f"Because: {explanation}")
+        print()
+
+    print("\n--- Chill Lofi Recommendations ---")
+    lofi_recommendations = recommend_songs(chill_lofi_profile, songs, k=3)
+    for rec in lofi_recommendations:
         song, score, explanation = rec
         print(f"{song['title']} - Score: {score:.2f}")
         print(f"Because: {explanation}")
